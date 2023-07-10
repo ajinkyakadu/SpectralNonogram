@@ -1,0 +1,139 @@
+body {
+    /* Background gradient with diagonal orientation */
+    background: linear-gradient(-45deg, rgba(238,119,82,0.5), rgba(231,60,126,0.5), rgba(35,166,213,0.5), rgba(35,213,171,0.5));
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite; /* Animation for smooth color transition */
+}
+
+.container.my-container {
+    /* Styling for container with class 'my-container' */
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
+    border-radius: 15px;                /* Rounded corners */
+    padding: 30px;                      /* Spacing inside the container */
+}
+
+h1.my-h1 {
+    /* Styling for heading elements with class 'my-h1' */
+    color: #007bff;                   /* Blue color */
+    font-size: 2.5rem;                  /* Font size */
+}
+
+p.my-p {
+    /* Styling for paragraph elements with class 'my-p' */
+    color: #6c757d;                   /* Gray color */
+    font-size: 1.2rem;                  /* Font size */
+}
+
+button.reset-button {
+    /* Styling for buttons with class 'reset-button' */
+    background-color: #28a745;        /* Green background color */
+    color: white;                     /* Text color */
+    border: none;                       /* No border */
+    padding: 10px 24px;                 /* Spacing inside the button */
+    text-align: center;                 /* Centered text */
+    text-decoration: none;              /* No text decoration */
+    display: inline-block;              /* Display as inline block */
+    font-size: 16px;                    /* Font size */
+    margin: 4px 2px;                    /* Margin */
+    cursor: pointer;                    /* Cursor style */
+}
+
+@keyframes gradient {
+    /* Animation keyframes for background gradient */
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    /* Styling for general container elements */
+    max-width: 1000px;                            /* Maximum width */
+    margin: auto;                                 /* Centered horizontally */
+    padding: 20px;                                /* Spacing inside the container */
+    text-align: center;                           /* Centered text */
+    color: #ffffff;                             /* Text color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);    /* Box shadow effect */
+}
+
+div.game-board {
+    /* Styling for game board container */
+    width: 900px;                               /* Width */
+    margin: auto;                               /* Centered horizontally */
+    border: 2px solid #ffffff;                /* Border with white color */
+    padding: 10px;                              /* Spacing inside the container */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  /* Box shadow effect */
+}
+
+button.my-button.square {
+    /* Styling for buttons with classes 'my-button' and 'square' */
+    width: 80px;                                /* Width */
+    height: 80px;                               /* Height */
+    margin: 3px;                                /* Margin */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Box shadow effect */
+    transition: box-shadow 0.3s ease;           /* Transition effect for box shadow */
+}
+
+button.my-button.square:hover {
+    /* Hover effect for buttons with classes 'my-button' and 'square' */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);   /* Increased box shadow on hover */
+}
+
+.my-button {
+    /* Styling for buttons with class 'my-button' */
+    margin: 10px !important;                     /* Margin */
+}
+
+.sum-card {
+    /* Styling for elements with class 'sum-card' */
+    width: 60px;                                 /* Width */
+    background: transparent !important;          /* Transparent background */
+    border: none;                                /* No border */
+}
+
+/* Adding specific progress bar color selectors */
+.progress-bar-danger {
+    /* Styling for progress bars with class 'progress-bar-danger' */
+    background-color: #dc3545 !important; /* Red background color */
+}
+
+.progress-bar-success {
+    /* Styling for progress bars with class 'progress-bar-success' */
+    background-color: #28a745 !important; /* Green background color */
+}
+
+.progress-bar-primary {
+    /* Styling for progress bars with class 'progress-bar-primary' */
+    background-color: #007bff !important; /* Blue background color */
+}
+
+.sum-card .card-body {
+    /* Styling for elements with class 'card-body' inside 'sum-card' */
+    display: flex;                          /* Display as flex to arrange elements horizontally */
+    justify-content: space-around;          /* Equal spacing around elements */
+}
+
+.vertical-progress-bar {
+    /* Styling for elements with class 'vertical-progress-bar' */
+    height: 60px;                           /* Height */
+    width: 15px;                            /* Width */
+    position: relative;                     /* Positioned relatively */
+}
+
+.vertical-progress-bar .progress-bar {
+    /* Styling for elements with class 'progress-bar' inside 'vertical-progress-bar' */
+    width: 100%;                            /* Full width */
+    position: absolute;                     /* Positioned absolutely */
+    bottom: 0;                              /* Positioned at the bottom */
+}
+
+.header-style {
+    /* Styling for elements with the class 'header-style' */
+    background-color: #333333;      /* Dark gray background color */
+    color: white;                   /* Text color */
+}
