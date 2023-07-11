@@ -1,6 +1,19 @@
-# Spectral Nonogram
+<p align="center">
+<img src="app/assets/logo.png" height="200">
+</p>
+<h1 align="center">
+Spectral Nonogram
+</h1>
+<p align="center">
+Colorful puzzle game: Match clues, fill grid, solve RGB values.
+<p>
 
-Spectral Nonogram is a colorful puzzle game where players need to fill a grid based on provided clues, ensuring that the color sum of each row and column matches the given RGB values. It's an engaging and challenging game that exercises your logic and problem-solving skills.
+
+## About
+
+<!-- <Main description>   -->
+
+Spectral Nonogram is a simplified colorful puzzle game where players need to fill a grid based on provided clues, ensuring that the color sum of each row and column matches the given RGB values. It's an engaging and challenging game that exercises your logic and problem-solving skills.
 
 ## Getting Started
 
