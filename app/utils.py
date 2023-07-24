@@ -25,11 +25,11 @@ def addColumnRestriction(columnRestrict, c1, c2, ch1, ch2):
     else:
         columnRestrict[c1,c2,ch1,ch2] = 1
         # Check row for further restrictions that need to be added
-        for j in range(0,len(COLORS)-1):
+        for j in range(0,len(COLORS)):
             if(columnRestrict[c1,c2,ch2,j] == 1):
                 addColumnRestriction(columnRestrict, c1, c2, ch1, j)
         # Check column for further restriction that need to be added
-        for i in range(0,len(COLORS)-1):
+        for i in range(0,len(COLORS)):
             if(columnRestrict[c1,c2,i,ch1]) == 1:
                 addColumnRestriction(columnRestrict, c1, c2, i, ch2)
         return columnRestrict[c1,c2,:,:]
@@ -43,11 +43,11 @@ def addRowRestriction(rowRestrict, r1, r2, ch1, ch2):
     else:
         rowRestrict[r1,r2,ch1,ch2] = 1
         # Check row for further restrictions that need to be added
-        for j in range(0,len(COLORS)-1):
+        for j in range(0,len(COLORS)):
             if(rowRestrict[r1,r2,ch2,j] == 1):
                 addRowRestriction(rowRestrict, r1, r2, ch1, j)
         # Check column for further restriction that need to be added
-        for i in range(0,len(COLORS)-1):
+        for i in range(0,len(COLORS)):
             if(rowRestrict[r1,r2,i,ch1]) == 1:
                 addRowRestriction(rowRestrict, r1, r2, i, ch2)
         return rowRestrict[r1,r2,:,:]
