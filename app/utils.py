@@ -1,3 +1,4 @@
+import numpy as np
 import random
 import dash_bootstrap_components as dbc
 from dash import html, dcc
@@ -13,6 +14,100 @@ COLORS_TO_CSS = {
     "primary": "blue",
 }
 
+### Functions for creating a uniquely solvable board
+
+# Add restrictions for column combinations (c1, c2) with characters (ch1,ch2)
+def addColumnRestriction(columnRestrict, c1, c2, ch1, ch2):
+    # Check if the location is already marked as restricted
+    if(ch1 == ch2 or columnRestrict[c1,c2,ch1,ch2] == 1):
+        return columnRestrict[c1,c2,:,:]
+    # If not, mark it
+    else:
+        columnRestrict[c1,c2,ch1,ch2] = 1
+        # Check row for further restrictions that need to be added
+        for j in range(0,len(COLORS)-1):
+            if(columnRestrict[c1,c2,ch2,j] == 1):
+                addColumnRestriction(columnRestrict, c1, c2, ch1, j)
+        # Check column for further restriction that need to be added
+        for i in range(0,len(COLORS)-1):
+            if(columnRestrict[c1,c2,i,ch1]) == 1:
+                addColumnRestriction(columnRestrict, c1, c2, i, ch2)
+        return columnRestrict[c1,c2,:,:]
+
+# Add restrictions for row combinations (r1, r2) with characters (ch1,ch2)
+def addRowRestriction(rowRestrict, r1, r2, ch1, ch2):
+    # Check if the location is already marked as restricted
+    if(ch1 == ch2 or rowRestrict[r1,r2,ch1,ch2] == 1):
+        return rowRestrict[r1,r2,:,:]
+    # If not, mark it
+    else:
+        rowRestrict[r1,r2,ch1,ch2] = 1
+        # Check row for further restrictions that need to be added
+        for j in range(0,len(COLORS)-1):
+            if(rowRestrict[r1,r2,ch2,j] == 1):
+                addRowRestriction(rowRestrict, r1, r2, ch1, j)
+        # Check column for further restriction that need to be added
+        for i in range(0,len(COLORS)-1):
+            if(rowRestrict[r1,r2,i,ch1]) == 1:
+                addRowRestriction(rowRestrict, r1, r2, i, ch2)
+        return rowRestrict[r1,r2,:,:]
+
+# Function for checking whether character 'kar' can be inserted at location
+# (c1,c2) on the board by checking the columnRestrict array
+def checkColumnRestrictions(board, columnRestrict, r1, r2, kar):
+    for j in range(0, r2):
+        if(columnRestrict[r2,j,board[r1,j],kar] == 1):
+            return False
+    return True
+
+# Function for checking whether character 'kar' can be inserted at location
+# (c1,c2) on the board by checking the rowRestrict array
+def checkRowRestrictions(board, rowRestrict, c1, c2, kar):
+    for i in range(0, c1):
+        if(rowRestrict[c1,i,board[i,c2],kar] == 1):
+            return False
+    return True
+
+def generate_unique_board(k):
+    nx = k
+    ny = k
+    board = np.zeros((ny,nx), dtype = int)
+    #These arrays indicate which characters combinations in 
+    #specific column combinations are not allowed
+    columnRestrict = np.zeros((nx,nx,len(COLORS),len(COLORS)), dtype = int)
+    rowRestrict = np.zeros((ny,ny,len(COLORS),len(COLORS)), dtype = int)
+    
+    #Loop over the board
+    for i in range(0,ny):
+        for j in range(0, nx):
+            validPick = False
+            kars = list(range(0,len(COLORS)))
+            while(validPick == False):
+                kar = kars.pop(random.randrange(len(kars)))
+                if i == 0 or j == 0:
+                    validPick = True
+                else:
+                    checkcol = checkColumnRestrictions(board, columnRestrict, i, j, kar)
+                    checkrow = checkRowRestrictions(board, rowRestrict, i, j, kar)
+                    if (checkcol == True and checkrow == True):
+                        validPick = True
+
+            board[i][j] = kar
+
+            #Update column restrictions
+            if(j > 0 and i < ny-1):
+                for k in range(0, j):
+                    #No board[i,k] after board[i,j] in column combination (k,j)
+                    columnRestrict[j,k,:,:] = addColumnRestriction(columnRestrict,j,k,board[i,j],board[i,k])
+            #Update row restrictions
+            if(i > 0 and j < nx-1):
+                for l in range(0, i):
+                    #No board[l,j] after board[i,j] in row combination (l,i)
+                    rowRestrict[i,l,:,:] = addRowRestriction(rowRestrict,i,l,board[i,j],board[l,j])
+
+    return board
+###
+
 def generate_new_puzzle(k):
     """Generates a new nonogram puzzle of size kxk.
 
@@ -26,8 +121,14 @@ def generate_new_puzzle(k):
         Tuple: A tuple containing the color configuration of the puzzle, 
         the sums of each color in each row, and the sums of each color in each column.
     """
-    # Randomly assign a color to each cell
-    color_config = [random.choice(COLORS) for _ in range(k*k)]
+
+    # Randomly assign a color to each cell such that puzzel is uniquely solvable
+    board = generate_unique_board(k).tolist()
+    color_config = [COLORS[i] for j in board for i in j] 
+    print(color_config)
+
+    # Randomly assign a color to each cell (old version)
+    #color_config = [random.choice(COLORS) for _ in range(k*k)]
 
     # Compute the number of each color in each row
     row_sums = [compute_color_sums(color_config[i*k:(i+1)*k]) for i in range(k)]
