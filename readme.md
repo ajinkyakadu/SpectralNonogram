@@ -27,13 +27,13 @@ To get started with Spectral Nonogram, follow these steps:
 2. Install the required dependencies by running the following command:
 
    ```
-   pip install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 
 3. Launch the application by executing the following command:
 
    ```
-   python app/main.py
+   python3 app/main.py
    ```
 
 4. Open a web browser and visit `http://localhost:8050` to access the game.
@@ -52,7 +52,7 @@ The project relies on the following dependencies:
 To install these dependencies, you can use the provided `requirements.txt` file. Run the following command:
 
 ```shell
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Docker Support
