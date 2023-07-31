@@ -69,31 +69,34 @@ def checkRowRestrictions(board, rowRestrict, c1, c2, kar):
     return True
 
 def generate_unique_board(k):
-    nx = k
-    ny = k
-    board = np.zeros((ny,nx), dtype = int)
+    board = np.zeros((k,k), dtype = int)
     #These arrays indicate which characters combinations in 
     #specific column combinations are not allowed
-    columnRestrict = np.zeros((nx,nx,len(COLORS),len(COLORS)), dtype = int)
-    rowRestrict = np.zeros((ny,ny,len(COLORS),len(COLORS)), dtype = int)
-    
-    #Loop over the board
-    for i in range(0,ny):
-        for j in range(0, nx):
-            validPick = False
-            kars = list(range(0,len(COLORS)))
-            while(validPick == False):
-                kar = kars.pop(random.randrange(len(kars)))
-                if i == 0 or j == 0:
-                    validPick = True
-                else:
-                    checkcol = checkColumnRestrictions(board, columnRestrict, i, j, kar)
-                    checkrow = checkRowRestrictions(board, rowRestrict, i, j, kar)
-                    if (checkcol == True and checkrow == True):
-                        validPick = True
+    columnRestrict = np.zeros((k,k,len(COLORS),len(COLORS)), dtype = int)
+    rowRestrict = np.zeros((k,k,len(COLORS),len(COLORS)), dtype = int)
+    success, board = generate_unique_subboard(0, 0, board, columnRestrict, rowRestrict, k, k)
+    return board
+
+def generate_unique_subboard(i, j, board, columnRestrict, rowRestrict, ny, nx):
+    validPick = False
+    kars = list(range(0,len(COLORS)))
+    while(validPick == False or len(kars) > 0):
+
+        if(validPick == False and len(kars) == 0):
+            return False, board
+
+        kar = kars.pop(random.randrange(len(kars)))
+        if i == 0 or j == 0:
+            validPick = True
+        else:
+            checkcol = checkColumnRestrictions(board, columnRestrict, i, j, kar)
+            checkrow = checkRowRestrictions(board, rowRestrict, i, j, kar)
+            if (checkcol == True and checkrow == True):
+                validPick = True
+
+        if(validPick):
 
             board[i][j] = kar
-
             #Update column restrictions
             if(j > 0 and i < ny-1):
                 for k in range(0, j):
@@ -105,7 +108,21 @@ def generate_unique_board(k):
                     #No board[l,j] after board[i,j] in row combination (l,i)
                     rowRestrict[i,l,:,:] = addRowRestriction(rowRestrict,i,l,board[i,j],board[l,j])
 
-    return board
+            #Move to next position and generate subboard
+            if(i == ny-1 and j == nx-1):
+                return True, board
+            elif(j == nx-1):
+                succeed, board = generate_unique_subboard(i+1,0,board,columnRestrict,rowRestrict,ny,nx)
+                if(succeed == True):
+                    return True, board
+                else:
+                    validPick = False
+            else:
+                succeed, board = generate_unique_subboard(i,j+1,board,columnRestrict,rowRestrict,ny,nx)
+                if(succeed == True):
+                    return True, board
+                else:
+                    validPick = False
 ###
 
 def generate_new_puzzle(k):
@@ -125,7 +142,7 @@ def generate_new_puzzle(k):
     # Randomly assign a color to each cell such that puzzel is uniquely solvable
     board = generate_unique_board(k).tolist()
     color_config = [COLORS[i] for j in board for i in j] 
-    print(color_config)
+    #print(color_config)
 
     # Randomly assign a color to each cell (old version)
     #color_config = [random.choice(COLORS) for _ in range(k*k)]
