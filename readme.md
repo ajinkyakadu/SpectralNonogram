@@ -2,11 +2,11 @@
 <img src="app/assets/logo.png" height="200">
 </p>
 <h1 align="center">
-Spectral Nonogram
+🌈 Spectral Nonogram 🧩
 </h1>
 <p align="center">
-Colorful puzzle game: Match clues, fill grid, solve RGB values.
-<p>
+Colorful puzzle game: Match clues, fill grid, solve RGB values. 🎨
+<p> 
 
 
 ## About
