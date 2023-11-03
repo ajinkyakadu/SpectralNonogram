@@ -2,14 +2,14 @@
 <img src="app/assets/logo.png" height="200">
 </p>
 <h1 align="center">
-🌈 Spectral Nonogram 🧩
+🌟 Spectral Nonogram 🎲🎨
 </h1>
 <p align="center">
-Colorful puzzle game: Match clues, fill grid, solve RGB values. 🎨
-<p> 
+Colorful puzzle game: Match clues, fill grid, solve RGB values. 🌈🖼️✨
+</p>
 
 
-## About
+## 🧠 About
 
 <!-- <Main description>   -->
 
@@ -19,7 +19,7 @@ Spectral Nonogram is a simplified colorful puzzle game where players need to fil
 <img src="app/assets/screenshot.png" height="500">
 </p>
 
-## Getting Started
+## 🎮 Getting Started
 
 To get started with Spectral Nonogram, follow these steps:
 
@@ -38,7 +38,7 @@ To get started with Spectral Nonogram, follow these steps:
 
 4. Open a web browser and visit `http://localhost:8050` to access the game.
 
-## Dependencies
+## 🛠️ Dependencies
 
 The project relies on the following dependencies:
 
@@ -85,10 +85,10 @@ The project structure is organized as follows:
   - `utils.py`: Utility functions used in the application.
   - `assets/`: Contains the CSS file (`style.css`) used for custom styling.
 
-## Contributing
+## 🤝 Contributing
 
 Contributions to the Spectral Nonogram project are always welcome! If you encounter any issues or have ideas for improvements, please feel free to open an issue or submit a pull request.
 
-## License
+## 📜 License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code for personal and commercial purposes.
