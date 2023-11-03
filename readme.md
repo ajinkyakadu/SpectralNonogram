@@ -5,7 +5,7 @@
 🌟 Spectral Nonogram 🎲🎨
 </h1>
 <p align="center">
-Colorful puzzle game: Match clues, fill grid, solve RGB values. 🌈🖼️✨
+Colorful puzzle game: Match clues, fill grid, solve RGB values.
 </p>
 
 
